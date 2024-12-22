@@ -9,6 +9,20 @@ import { PrismaService } from '@/infra/database/prisma/prisma.service'
 export class PrismaParticipantsRepository implements ParticipantsRepository {
   constructor(private prisma: PrismaService) {}
 
+  async findById(id: string): Promise<Participant | null> {
+    const participant = await this.prisma.participant.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!participant) {
+      return null
+    }
+
+    return PrismaParticipantMapper.toDomain(participant)
+  }
+
   async findByEmail(email: string): Promise<Participant | null> {
     const participant = await this.prisma.participant.findUnique({
       where: {
