@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -13,7 +12,7 @@
     "incremental": true,
     "skipLibCheck": true,
     "strict": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
@@ -23,6 +22,7 @@
     },
     "types": [
       "vitest/globals",
+      "multer"
     ]
   }
 }
