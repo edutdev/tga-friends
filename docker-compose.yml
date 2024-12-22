@@ -1,7 +1,8 @@
-version: '3.7'
+version: '3.8'
 
 services:
   postgres:
+    container_name: tga-friends-pg
     image: bitnami/postgresql:latest
     ports:
       - '5432:5432'
@@ -10,7 +11,12 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
     volumes:
-      - ./tga_friends_pg_data:/bitnami/postgresql
+      - ./data/pg:/data/postgres
 
-volumes:
-  tga_friends_pg_data:
+  redis:
+    container_name: tga-friends-redis
+    image: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - ./data/redis:/data
