@@ -24,7 +24,7 @@ type RegisterParticipantBodySchema = z.infer<
   typeof registerParticipantBodySchema
 >
 
-@Controller('/accounts')
+@Controller('/participants')
 @Public()
 export class RegisterParticipantController {
   constructor(private registerParticipant: RegisterParticipantUseCase) {}
