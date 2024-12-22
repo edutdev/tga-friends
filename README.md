@@ -2,7 +2,7 @@
 
 ### POST `/accounts`
 
-Cria a conta para um novo participante.
+Cria uma nova conta para um participante.
 
 #### Request body
 ```json
@@ -22,7 +22,7 @@ Cria a conta para um novo participante.
 
 ### POST `/sessions`
 
-Autentica um participante.
+Autentica um participante e retorna um token JWT para acesso.
 
 #### Request body
 ```json
@@ -34,6 +34,28 @@ Autentica um participante.
 #### Response body
 ```json
 {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+  "access_token": "<your_access_token>"
+}
+```
+
+### GET `/me`
+
+Obtém as informações do participante com base no ID presente no token de autenticação.
+
+#### Request body
+```json
+{
+  "Authorization": "Bearer <your_access_token>"
+}
+```
+
+#### Response body
+```json
+{
+  "participant": {
+    "id": "123e4567-e89b-12d3-a456-426614174000",
+    "name": "John Doe",
+    "email": "johndoe@example.com"
+  }
 }
 ```
