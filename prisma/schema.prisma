@@ -8,11 +8,36 @@ datasource db {
 }
 
 model Participant {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now()) @map("created_at")
+  id                  String               @id @default(uuid())
+  name                String
+  email               String               @unique
+  password            String
+  createdAt           DateTime             @default(now()) @map("created_at")
+  sessionParticipants SessionParticipant[]
 
   @@map("participants")
+}
+
+model SessionParticipant {
+  id            String   @id @default(uuid())
+  sessionId     String   @map("session_id")
+  participantId String   @map("participant_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  session     Session     @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  participant Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, participantId])
+  @@map("session_participants")
+}
+
+model Session {
+  id                  String               @id @default(uuid())
+  hostId              String               @map("host_id")
+  name                String
+  state               String
+  createdAt           DateTime             @default(now()) @map("created_at")
+  sessionParticipants SessionParticipant[]
+
+  @@map("sessions")
 }
